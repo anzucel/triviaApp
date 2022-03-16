@@ -1,0 +1,46 @@
+<ion-header [translucent]="true" class="ion-padding" center>
+  <ion-toolbar>
+    <ion-icon slot="start" name="person-outline"></ion-icon>
+    <ion-title>
+      {{usuario}} 
+    </ion-title>
+    <h1 slot="end">{{ time | async }}</h1>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-slides mode="ios" pager="true" (ionSlideDidChange)="slideChanged()">
+  <ion-slide *ngFor="let pelicula of preguntas; let i = index">
+    <ion-card class="card-info">
+      <ion-card-subtitle class="font-color">{{i+1}} / 20 </ion-card-subtitle>
+      <ion-card-title>{{pelicula.question}}</ion-card-title>
+      <ion-card-content>
+        
+        <ion-radio-group name="opciones" 
+                         (ionChange)="getOpcion($event.detail.value, i)">
+          <ion-item *ngFor="let resp of pelicula.incorrect_answers; let i = index">
+            <ion-label>{{resp}}</ion-label>
+            <ion-radio [value]="resp" [disabled]="!seleccionado"></ion-radio>
+          </ion-item>
+
+        </ion-radio-group>
+
+      </ion-card-content>
+    </ion-card>
+
+  </ion-slide>
+</ion-slides>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+    <ion-button (click)="regresar()" slot="start" color="dark">
+      <ion-icon slot="start" name="log-out-outline"></ion-icon>
+      <ion-label>Salir</ion-label>
+    </ion-button>
+    </ion-buttons>
+    <ion-label slot="end" class="font-color">Punteo: {{punteo}}/20</ion-label>
+  </ion-toolbar>
+</ion-footer>
+

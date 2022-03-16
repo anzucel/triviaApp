@@ -1,17 +1,71 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      TriviApp
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <form #formulario="ngForm"> 
+    <ion-list>
+        <ion-card-content>
+          <ion-list>
+            <ion-item>
+              <ion-input type="text" 
+                         placeholder="Name" 
+                         [(ngModel)]="infoUsuario.usuario"
+                         required
+                         name="user"></ion-input>
+            </ion-item>
+    
+            <ion-item> 
+              <ion-label>Category</ion-label>
+              <ion-select value="{{categorias[2]}}"
+                          (ionChange)="onSelect($event.target.value)"
+                          placeholder="Select category"
+                          required>
+                <ion-select-option *ngFor="let categoria of categorias" 
+                                    value="{{categoria}}">
+                  {{categoria}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+    
+            <ion-item>
+              <ion-label>Level</ion-label>
+              <ion-select value="{{niveles[0]}}"
+                          (ionChange)="levelSelect($event.target.value)"
+                          placeholder="Select level"
+                          required>
+                <ion-select-option *ngFor="let nivel of niveles" 
+                                    value="{{nivel}}">
+                  {{nivel}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+    
+            <ion-button [disabled]="formulario.invalid"
+                        (click)="btnStart()" 
+                        type="submit" 
+                        expand="block">
+              Start
+            </ion-button>
+    
+          </ion-list>
+        </ion-card-content>
+  
+    </ion-list>
+  </form>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+
+<!-- 
+  <ion-grid style="height: 100%; width: 100%;">
+    <ion-row justify-content-center align-items-center style="height: 100%">
+      <ion-card id="login-card" style="position:static;" center class="ion-padding"> 
+        
+      </ion-card>    
+    </ion-row>
+  </ion-grid> -->
+  <!-- <app-explore-container name="Tab 1 page"></app-explore-container>-->
 </ion-content>
